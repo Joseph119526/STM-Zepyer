@@ -6,3 +6,8 @@ project(platform)
 
 FILE(GLOB sources src/*.c)
 target_sources(app PRIVATE ${sources})
+
+add_subdirectory(module)
+zephyr_include_directories(
+	${CMAKE_CURRENT_LIST_DIR}/module
+	)

@@ -10,7 +10,6 @@ Build
 ********************
 cd ~/zephyrproject/
 west build -p always -b nucleo_f446ze app -d ./app/build
-********************
 
 Program
 ********************

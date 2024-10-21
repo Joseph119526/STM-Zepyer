@@ -9,5 +9,6 @@
 		compatible = "peripheral";
 		g2-gpios = <&gpiog 2 GPIO_ACTIVE_LOW>;
 		g3-gpios = <&gpiog 3 GPIO_ACTIVE_LOW>;
+		f2-gpios = <&gpiof 2 GPIO_ACTIVE_LOW>;
 	};
 };

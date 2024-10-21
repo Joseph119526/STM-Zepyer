@@ -15,5 +15,9 @@ properties:
     type: phandle-array
     required: true
     description: |
-      LED 0
-
+      LED 1
+  f2-gpios:
+    type: phandle-array
+    required: true
+    description: |
+      SW 0

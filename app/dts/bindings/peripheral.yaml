@@ -1,0 +1,19 @@
+# Copyright (c) 2023 Libre Solar Technologies GmbH
+# SPDX-License-Identifier: Apache-2.0
+
+description: project's peripheral definition
+
+compatible: "peripheral"
+
+properties:
+  g2-gpios:
+    type: phandle-array
+    required: true
+    description: |
+      LED 0
+  g3-gpios:
+    type: phandle-array
+    required: true
+    description: |
+      LED 0
+

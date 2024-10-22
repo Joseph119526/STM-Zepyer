@@ -15,4 +15,5 @@
  */
 #include "led.h"
 #include "sw.h"
+#include "eeprom.h"
 

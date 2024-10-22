@@ -12,3 +12,8 @@
 		f2-gpios = <&gpiof 2 GPIO_ACTIVE_LOW>;
 	};
 };
+
+&usart6 {
+	label = "console";
+};
+

@@ -53,7 +53,8 @@ int main(void)
 		LED_OFF();
 	}
 
-	EEPROM_Comp();
+	ExtEEPROM_Cmp();
+	ExtEEPROM_Dump();
 
 	while(1)
 	{

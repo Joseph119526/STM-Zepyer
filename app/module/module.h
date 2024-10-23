@@ -15,5 +15,5 @@
  */
 #include "led.h"
 #include "sw.h"
-#include "eeprom.h"
+#include "ext_eeprom.h"
 

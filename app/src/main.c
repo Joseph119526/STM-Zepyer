@@ -9,6 +9,8 @@
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
 #include "module.h"
+#include <zephyr/drivers/spi.h>
+
 
 static void SW_handler(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
@@ -31,6 +33,19 @@ int main(void)
 
 
 	printk("Hello World! %s\n", CONFIG_BOARD);
+
+
+	if(ExtFlash_Init())
+	{
+
+	}
+	else
+	{
+
+	}
+
+	ExtFlash_ReadID();
+	return 0;
 
 	ret = LED_Init();
 	if(ret)

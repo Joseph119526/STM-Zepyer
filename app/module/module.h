@@ -16,4 +16,4 @@
 #include "led.h"
 #include "sw.h"
 #include "ext_eeprom.h"
-
+#include "ext_flash.h"

@@ -17,3 +17,7 @@
 	label = "console";
 };
 
+&spi2 {
+	pinctrl-0 = < &spi2_nss_pb12 &spi2_sck_pb13 &spi2_miso_pc2 &spi2_mosi_pb15 >;
+};
+

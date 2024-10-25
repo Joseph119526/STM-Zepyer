@@ -1,0 +1,13 @@
+zephyr_library_sources(
+	${CMAKE_CURRENT_LIST_DIR}/qf/qep_hsm.c
+	${CMAKE_CURRENT_LIST_DIR}/qf/qf_act.c
+	${CMAKE_CURRENT_LIST_DIR}/qf/qf_defer.c
+	${CMAKE_CURRENT_LIST_DIR}/qf/qf_mem.c
+	${CMAKE_CURRENT_LIST_DIR}/qf/qf_qact.c
+	${CMAKE_CURRENT_LIST_DIR}/qf/qf_qmact.c
+	${CMAKE_CURRENT_LIST_DIR}/qf/qep_msm.c
+	${CMAKE_CURRENT_LIST_DIR}/qf/qf_dyn.c
+	${CMAKE_CURRENT_LIST_DIR}/qf/qf_ps.c
+	${CMAKE_CURRENT_LIST_DIR}/qf/qf_qeq.c
+	${CMAKE_CURRENT_LIST_DIR}/qf/qf_time.c
+	)

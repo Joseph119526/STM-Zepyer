@@ -9,6 +9,7 @@
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
 #include "module.h"
+#include "state_machine.h"
 
 static void SW_handler(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
@@ -17,11 +18,11 @@ static void SW_handler(const struct device *dev, struct gpio_callback *cb, uint3
 
 	if(ret)
 	{
-		LED_ON();
+		printk("SW: ON\n");
 	}
 	else
 	{
-		LED_OFF();
+		printk("SW: OFF\n");
 	}
 }
 
@@ -42,7 +43,7 @@ int main(void)
 	{
 		printk("SW_Init error:%d\n", ret);
 	}
-
+/*
 	if(SW_Status())
 	{
 		LED_ON();
@@ -51,7 +52,7 @@ int main(void)
 	{
 		LED_OFF();
 	}
-
+*/
 	ExtEEPROM_Cmp();
 	ExtEEPROM_Dump();
 
@@ -62,7 +63,7 @@ int main(void)
 	}
 	ExtFlash_Cmp();
 	ExtFlash_Dump(0,16);
-
+/*
 	ret = Watchdog_Init();
 	if(ret)
 	{
@@ -74,5 +75,8 @@ int main(void)
 		Watchdog_Feed();
 		k_sleep(K_MSEC(50));
 	}
+*/
+	State_Machine_Init();
+
 	return 0;
 }

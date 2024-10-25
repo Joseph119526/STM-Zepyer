@@ -8,6 +8,9 @@ FILE(GLOB sources src/*.c)
 target_sources(app PRIVATE ${sources})
 
 add_subdirectory(module)
+add_subdirectory(state_machine)
 zephyr_include_directories(
 	${CMAKE_CURRENT_LIST_DIR}/module
+	${CMAKE_CURRENT_LIST_DIR}/state_machine
 	)
+add_subdirectory(qpc)

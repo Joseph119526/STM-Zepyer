@@ -9,8 +9,6 @@
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/kernel.h>
 #include "module.h"
-#include <zephyr/drivers/spi.h>
-
 
 static void SW_handler(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
@@ -31,32 +29,18 @@ int main(void)
 {
 	int ret = 0;
 
-
 	printk("Hello World! %s\n", CONFIG_BOARD);
-
-
-	if(ExtFlash_Init())
-	{
-
-	}
-	else
-	{
-
-	}
-
-	ExtFlash_ReadID();
-	return 0;
 
 	ret = LED_Init();
 	if(ret)
 	{
-		printk("LED Init Error:%d\n", ret);
+		printk("LED_Init error:%d\n", ret);
 	}
 
 	ret = SW_Init(SW_handler);
 	if(ret)
 	{
-		printk("SW Init Error:%d\n", ret);
+		printk("SW_Init error:%d\n", ret);
 	}
 
 	if(SW_Status())
@@ -70,6 +54,14 @@ int main(void)
 
 	ExtEEPROM_Cmp();
 	ExtEEPROM_Dump();
+
+    ret = ExtFlash_Init();
+	if(ret)
+	{
+		printk("ExtFlash_Init error:%d\n", ret);
+	}
+	ExtFlash_Cmp();
+	ExtFlash_Dump(0,16);
 
 	while(1)
 	{

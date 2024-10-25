@@ -123,10 +123,17 @@ extern "C" {
 #define EXT_FLASH_OK				  0	///< Success
 #define EXT_FLASH_ERROR				  1	///< Error:flash busy
 
-int ExtFlash_Init(void);
-void ExtFlash_WakeUP(void);
+#define EXT_FLASH_DEBUG               1
+#define EXT_FLASH_DEBUG_PUTS(x)       do{if(EXT_FLASH_DEBUG){printk("%s",x);}}while(0)
+#define EXT_FLASH_DEBUG_PRINT(...)    do{if(EXT_FLASH_DEBUG){printk(__VA_ARGS__);}}while(0)
 
-int ExtFlash_ReadID(void);
+int ExtFlash_Init(void);
+int ExtFlash_ChipErase(void);
+int ExtFlash_SubSectorErase(unsigned long addr);
+int ExtFlash_WriteData(unsigned long WriteAddr, unsigned char* pBuffer, unsigned short NumByteToWrite);
+int ExtFlash_ReadData(unsigned long ReadAddr, unsigned char* pBuffer,  unsigned short NumByteToRead);
+void ExtFlash_Dump(unsigned long ReadAddr,	unsigned short NumByteToRead);
+void ExtFlash_Cmp(void);
 
 #ifdef __cplusplus
 }

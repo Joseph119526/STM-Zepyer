@@ -46,7 +46,7 @@ int SW_Init(gpio_callback_handler_t handler)
 	ret = gpio_pin_interrupt_configure_dt(&SW, GPIO_INT_EDGE_BOTH);
 	if(ret)
 	{
-		return 2;
+		return 3;
 	}
 
 	SW_handler = handler;
@@ -56,7 +56,7 @@ int SW_Init(gpio_callback_handler_t handler)
 	ret = gpio_add_callback(SW.port, &SW_cb);
 	if(ret)
 	{
-		return 3;
+		return 4;
 	}
 	return 0;
 }

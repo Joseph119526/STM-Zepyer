@@ -78,7 +78,6 @@ extern const struct device *EEPROM;
 #define ExtEEPROM_IsDeviceReady(dev_addr)                    I2C_IsDeviceReady(EEPROM,EXT_EEPOM_ADDR)
 
 #define EXT_EEPROM_DEBUG                                     (1) //(pCMD->csmsg.mode.dest.ext_flash)
-//#define EXT_EEPROM_DEBUG_WRITE(x1,x2)                      do{if(EXT_EEPROM_DEBUG){printk(x1,x2);}}while(0)
 #define EXT_EEPROM_DEBUG_PUTS(x)                             do{if(EXT_EEPROM_DEBUG){printk("%s",x);}}while(0)
 #define EXT_EEPROM_DEBUG_PRINT(...)                          do{if(EXT_EEPROM_DEBUG){printk(__VA_ARGS__);}}while(0)
 

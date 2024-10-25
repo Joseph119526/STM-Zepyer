@@ -97,7 +97,6 @@ int ExtEEPROM_WriteData(unsigned short WriteAddr, unsigned char* pBuffer,  unsig
 	return EXT_EEPROM_OK;
 }
 
-
 void ExtEEPROM_Dump(void)
 {
 	unsigned int i, j = 0;
@@ -137,6 +136,7 @@ void ExtEEPROM_Dump(void)
 
 		EXT_EEPROM_DEBUG_PUTS(string);
 	}
+	EXT_EEPROM_DEBUG_PUTS("\r\n");
 }
 
 
@@ -146,22 +146,25 @@ void ExtEEPROM_Cmp(void)
 	uint8_t cmp_data[16];
 	uint8_t data[16], data_base;
 
+	printk("ExtEEPROM_Cmp:\n");
+
 	ret = ExtEEPROM_IsDeviceReady();
 	if(ret)
 	{
-		printk("EEPROM is not ready:%d\n", ret);
+		printk("ExtEEPROM_IsDeviceReady error:%d\n", ret);
+		return;
 	}
 
 	data[0] = 0x00;
 	ret = ExtEEPROM_ReadData(0x00, &data[0], 1);
 	if(ret)
 	{
-		printk("Error reading from FRAM! error code (%d)\n", ret);
+		printk("ExtEEPROM_ReadData error:%d\n", ret);
 		return;
 	}
 	else
 	{
-		printk("Read 0x%X from address 0x00.\n", data[0]);
+		printk("Addr[0x00]=0x%02X\n", data[0]);
 	}
 
 	data_base = data[0];
@@ -175,27 +178,18 @@ void ExtEEPROM_Cmp(void)
 		data[i] = 0x00;
 	}
 
-	/* write them to the FRAM */
 	ret = ExtEEPROM_WriteData(0x00, cmp_data, sizeof(cmp_data));
 	if(ret)
 	{
-		printk("Error writing to EEPROM! error code (%d)\n", ret);
+		printk("ExtEEPROM_WriteData error:%d\n", ret);
 		return;
-	}
-	else
-	{
-		printk("Wrote %zu bytes to address 0x00.\n", sizeof(cmp_data));
 	}
 
 	ret = ExtEEPROM_ReadData(0x00, data, sizeof(data));
 	if(ret)
 	{
-		printk("Error reading from EEPROM! error code (%d)\n", ret);
+		printk("ExtEEPROM_ReadData error:%d\n", ret);
 		return;
-	}
-	else
-	{
-		printk("Read %zu bytes from address 0x00.\n", sizeof(data));
 	}
 
 	ret = 0;
@@ -205,7 +199,7 @@ void ExtEEPROM_Cmp(void)
 		//printk("0x%X ?= 0x%X\n", cmp_data[i], data[i]);
 		if(cmp_data[i] != data[i])
 		{
-			printk("Data comparison failed @ %d:%02x\n", i, data[i]);
+			printk("Data comparison failed @ %d:%02X\n", i, data[i]);
 			ret = -EIO;
 		}
 	}

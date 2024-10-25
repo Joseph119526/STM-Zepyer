@@ -11,6 +11,9 @@
 		g3-gpios = <&gpiog 3 GPIO_ACTIVE_LOW>;
 		f2-gpios = <&gpiof 2 GPIO_ACTIVE_LOW>;
 	};
+	aliases {
+		watchdog0 = &wwdg;
+	};
 };
 
 &usart6 {
@@ -19,5 +22,13 @@
 
 &spi2 {
 	pinctrl-0 = < &spi2_nss_pb12 &spi2_sck_pb13 &spi2_miso_pc2 &spi2_mosi_pb15 >;
+};
+
+&rcc {
+	apb1-prescaler = <16>;
+};
+
+&wwdg {
+	status = "okay";
 };
 

@@ -55,7 +55,7 @@ int main(void)
 	ExtEEPROM_Cmp();
 	ExtEEPROM_Dump();
 
-    ret = ExtFlash_Init();
+	ret = ExtFlash_Init();
 	if(ret)
 	{
 		printk("ExtFlash_Init error:%d\n", ret);
@@ -63,9 +63,16 @@ int main(void)
 	ExtFlash_Cmp();
 	ExtFlash_Dump(0,16);
 
+	ret = Watchdog_Init();
+	if(ret)
+	{
+		printk("Watchdog_Init error:%d\n", ret);
+	}
+
 	while(1)
 	{
-		k_sleep(K_MSEC(2000));
+		Watchdog_Feed();
+		k_sleep(K_MSEC(50));
 	}
 	return 0;
 }

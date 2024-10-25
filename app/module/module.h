@@ -17,3 +17,4 @@
 #include "sw.h"
 #include "ext_eeprom.h"
 #include "ext_flash.h"
+#include "watchdog.h"

@@ -48,18 +48,7 @@ enum AppSignals {
 };
 
 //${Shared::produce_sig_dict} ................................................
-#ifdef Q_SPY
-static inline void produce_sig_dict(void) {
-    QS_SIG_DICTIONARY(EAT_SIG,     (void *)0);
-    QS_SIG_DICTIONARY(DONE_SIG,    (void *)0);
-    QS_SIG_DICTIONARY(PAUSE_SIG,   (void *)0);
-    QS_SIG_DICTIONARY(SERVE_SIG,   (void *)0);
-    QS_SIG_DICTIONARY(TEST_SIG,    (void *)0);
 
-    QS_SIG_DICTIONARY(TIMEOUT_SIG, (void *)0);
-    QS_SIG_DICTIONARY(HUNGRY_SIG,  (void *)0);
-}
-#endif // def Q_SPY
 
 //${Shared::N_PHILO} .........................................................
 #define N_PHILO ((uint8_t)5U)
@@ -75,19 +64,6 @@ typedef struct {
 
 // public:
 
-#ifdef QEVT_DYN_CTOR
-static inline TableEvt * TableEvt_ctor(TableEvt * const me,
-    uint8_t id)
-{
-    if (me != (TableEvt *)0) {
-        // don't call QEvt_ctor() because the initialization of all
-        // QEvt attributes is already done in QF_QF_newX_()
-        me->philoId = id;
-    }
-    return me;
-}
-#endif // def QEVT_DYN_CTOR
-
 //${Shared::AO_Philo[N_PHILO]} ...............................................
 extern QActive * const AO_Philo[N_PHILO];
 
@@ -101,17 +77,5 @@ extern QActive * const AO_Table;
 void Table_ctor(void);
 //$enddecl${Shared} ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-#ifdef QXK_H_
-
-extern QXThread * const TH_XThread1;
-void XThread1_ctor(void);
-
-extern QXThread * const TH_XThread2;
-void XThread2_ctor(void);
-
-extern QXSemaphore TH_sema;
-extern QXMutex TH_mutex;
-
-#endif // QXK_H_
 
 #endif // DPP_H_

@@ -77,7 +77,7 @@ static void zephyr_tick_function(struct k_timer *tid); // prototype
 static void zephyr_tick_function(struct k_timer *tid) {
     Q_UNUSED_PAR(tid);
 
-    QTIMEEVT_TICK_X(0U, &timerID);
+    QTIMEEVT_TICK_X(0U, (void *)0);
 }
 
 //============================================================================

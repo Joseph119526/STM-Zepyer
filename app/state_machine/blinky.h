@@ -34,6 +34,17 @@ enum BlinkySignals {
 	MAX_SIG 			  /* the last signal */
 };
 
+static char* BLINKY_SIGNALS_NAMES[] = {
+	"QEP_EMPTY_SIG_",
+	"Q_ENTRY_SIG",
+	"Q_EXIT_SIG",
+	"Q_INIT_SIG",
+	"DUMMY_SIG",
+	"MAX_PUB_SIG",    /* the last published signal */
+	"TIMEOUT_SIG",
+	"MAX_SIG"         /* the last signal (keep always last) */
+};
+
 void Blinky_ctor(void);
 extern QActive * const AO_Blinky; /* opaque pointer */
 

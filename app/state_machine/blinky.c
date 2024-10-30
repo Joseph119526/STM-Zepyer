@@ -72,14 +72,27 @@ QState Blinky_initial(Blinky * const me, QEvt const * const e) {
 /*..........................................................................*/
 QState Blinky_off(Blinky * const me, QEvt const * const e) {
     QState status;
+
+	printk("QPC STATE : Blinky_off Event: ");
+	printk(" %s",BLINKY_SIGNALS_NAMES[e->sig]);
+	printk("\r\n");
+
     switch (e->sig) {
         case Q_ENTRY_SIG: {
             LED_OFF();
             status = Q_HANDLED();
             break;
         }
+        case Q_INIT_SIG: {
+            status = Q_HANDLED();
+            break;
+        }
         case TIMEOUT_SIG: {
             status = Q_TRAN(&Blinky_on);
+            break;
+        }
+        case Q_EXIT_SIG: {
+            status = Q_HANDLED();
             break;
         }
         default: {
@@ -92,14 +105,27 @@ QState Blinky_off(Blinky * const me, QEvt const * const e) {
 /*..........................................................................*/
 QState Blinky_on(Blinky * const me, QEvt const * const e) {
     QState status;
+
+	printk("QPC STATE : Blinky_on Event: ");
+	printk(" %s",BLINKY_SIGNALS_NAMES[e->sig]);
+	printk("\r\n");
+
     switch (e->sig) {
         case Q_ENTRY_SIG: {
             LED_ON();
             status = Q_HANDLED();
             break;
         }
+        case Q_INIT_SIG: {
+            status = Q_HANDLED();
+            break;
+        }
         case TIMEOUT_SIG: {
             status = Q_TRAN(&Blinky_off);
+            break;
+        }
+        case Q_EXIT_SIG: {
+            status = Q_HANDLED();
             break;
         }
         default: {

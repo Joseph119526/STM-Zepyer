@@ -76,7 +76,7 @@ int main(void)
 		k_sleep(K_MSEC(50));
 	}
 */
-	State_Machine_Init();
+	StateMachineFramwork();
 
 	return 0;
 }

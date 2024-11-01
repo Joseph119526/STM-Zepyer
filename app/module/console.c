@@ -20,6 +20,8 @@
 #include <zephyr/drivers/uart.h>
 #include <zephyr/kernel.h>
 
+#include "pulse_gen.h"
+
 #define MSG_SIZE 32
 /* queue to store up to 10 messages (aligned to 4-byte boundary) */
 K_MSGQ_DEFINE(uart_msgq, MSG_SIZE, 10, 4);
@@ -65,6 +67,10 @@ void Console_Callback(const struct device *dev, void *user_data)
 
 			/* if queue is full, message is silently dropped */
 			k_msgq_put(&uart_msgq, &rx_buf, K_NO_WAIT);
+
+			if(rx_buf[0]=='p') {
+				PulseGen_Post(20, 80);
+			}
 
 			/* reset the buffer (it was copied to the msgq) */
 			rx_buf_pos = 0;

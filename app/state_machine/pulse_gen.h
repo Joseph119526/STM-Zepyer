@@ -1,9 +1,9 @@
 /**
  *****************************************************************************
- * @file state_machine.h
+ * @file pulse_gen.h
  * @brief
  * @author Joseph Hsu
- * @date 2024/10/25
+ * @date 2024/11/01
  * @version
  *
  * @par History
@@ -14,29 +14,40 @@
  *****************************************************************************
  */
 /**
- * @defgroup STATE_MACHINE
+ * @defgroup PULSE_GEN
  * @brief
  * @{
  */
 
-#ifndef __STATE_MACHINE_H__
-#define __STATE_MACHINE_H__
+#ifndef __PULSE_GEN_H__
+#define __PULSE_GEN_H__
 
 #ifdef  __cplusplus
 extern "C" {
  #endif		/* __cplusplus */
 
+#include "state_machine_manage.h"
 
-int StateMachineFramwork(void);
+
+typedef struct _PulseGen_Evt{
+// protected:
+    QEvt super;
+
+// public:
+    uint32_t hi_duration;
+    uint32_t lo_duration;
+} PulseGen_Evt;
+
+void PulseGen_Init(void);
+void PulseGen_Post(uint32_t hi_duration, uint32_t lo_duration);
 
 
 #ifdef __cplusplus
 }
 #endif	/* __cplusplus */
-#endif  /* __STATE_MACHINE_H__ */
+#endif  /* __PULSE_GEN_H__ */
 
 /**
   * @}
-  */ /* STATE_MACHINE Module*/
-
+  */ /* PULSE_GEN Module*/
 

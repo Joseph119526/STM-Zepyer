@@ -16,7 +16,6 @@
 
 #include "qpc.h"
 #include "pulse_gen.h"
-#include "led.h"
 
 typedef struct {
 // protected:
@@ -27,6 +26,8 @@ typedef struct {
 
     uint32_t hi_duration;
     uint32_t lo_duration;
+    uint32_t hi2_duration;
+
 } PulseGen;
 
 PulseGen PulseGen_inst; // the Blinky active object
@@ -36,21 +37,25 @@ static QState PulseGen_initial(PulseGen * const me, void const * const par);
 static QState PulseGen_idle(PulseGen * const me, QEvt const * const e);
 static QState PulseGen_set_hi(PulseGen * const me, QEvt const * const e);
 static QState PulseGen_set_lo(PulseGen * const me, QEvt const * const e);
+static QState PulseGen_set_hi2(PulseGen * const me, QEvt const * const e);
 
-void PulseGen_Post(uint32_t hi_duration, uint32_t lo_duration)
+void PulseGen_Post(uint32_t hi_duration, uint32_t lo_duration,uint32_t hi2_duration)
 {
     PulseGen_Evt *evt = Q_NEW(PulseGen_Evt, PULSE_GEN_TRIGGER_SIG);
+
     evt->hi_duration = hi_duration;
     evt->lo_duration = lo_duration;
+    evt->hi2_duration = hi2_duration;
+
     QACTIVE_POST(AO_PulseGen, &evt->super, 0);
 
-    printk("PulseGen_Post:%d,%d\n",hi_duration,lo_duration);
+    printk("PulseGen_Post:%d,%d,%d\n",evt->hi_duration,evt->lo_duration,evt->hi2_duration);
 }
 
 QState PulseGen_initial(PulseGen * const me, void const * const par) {
     Q_UNUSED_PAR(par);
-    LED_OFF();
 
+    LED_Init();
     return Q_TRAN(&PulseGen_idle);
 }
 
@@ -61,6 +66,7 @@ QState PulseGen_idle(PulseGen * const me, QEvt const * const e) {
 
     switch (e->sig) {
         case Q_ENTRY_SIG: {
+			LED_OFF();
             status = Q_HANDLED();
             break;
         }
@@ -69,7 +75,11 @@ QState PulseGen_idle(PulseGen * const me, QEvt const * const e) {
             break;
         }
         case PULSE_GEN_TRIGGER_SIG: {
-            printk("PulseGen Trigger:%d,%d\n",me->hi_duration,me->lo_duration);
+            me->hi_duration = Q_EVT_CAST(PulseGen_Evt)->hi_duration;
+            me->lo_duration = Q_EVT_CAST(PulseGen_Evt)->lo_duration;
+            me->hi2_duration = Q_EVT_CAST(PulseGen_Evt)->hi2_duration;
+
+            printk("%s: %d,%d,%d\n",__func__,me->hi_duration,me->lo_duration,me->hi2_duration);
             status = Q_TRAN(&PulseGen_set_hi);
             break;
         }
@@ -88,9 +98,8 @@ QState PulseGen_set_hi(PulseGen * const me, QEvt const * const e) {
 
     switch (e->sig) {
         case Q_ENTRY_SIG: {
-			printk("PulseGen set hi:%d\n",me->hi_duration);
-			//QTimeEvt_armX(&me->timeEvt, me->hi_duration, 0U);
-			QTimeEvt_armX(&me->timeEvt, 20, 0U);
+            printk("%s: %d\n",__func__,me->hi_duration);
+            QTimeEvt_armX(&me->timeEvt, me->hi_duration, 0U);
 
             LED_ON();
             status = Q_HANDLED();
@@ -119,11 +128,41 @@ QState PulseGen_set_lo(PulseGen * const me, QEvt const * const e) {
 
     switch (e->sig) {
         case Q_ENTRY_SIG: {
-			printk("PulseGen set lo:%d\n",me->lo_duration);
-			//QTimeEvt_armX(&me->timeEvt, me->lo_duration, 0U);
-			QTimeEvt_armX(&me->timeEvt, 80, 0U);
+            printk("%s: %d\n",__func__,me->lo_duration);
+            QTimeEvt_armX(&me->timeEvt, me->lo_duration, 0U);
 
             LED_OFF();
+            status = Q_HANDLED();
+            break;
+        }
+        case Q_EXIT_SIG: {
+			(void)QTimeEvt_disarm(&me->timeEvt);
+            status = Q_HANDLED();
+            break;
+        }
+        case TIMEOUT_SIG: {
+            status = Q_TRAN(&PulseGen_set_hi2);
+            break;
+        }
+        default: {
+            status = Q_SUPER(&QHsm_top);
+            break;
+        }
+    }
+    return status;
+}
+
+QState PulseGen_set_hi2(PulseGen * const me, QEvt const * const e) {
+    QState status;
+
+	printk("%s: %s\r\n", __func__,SM_SIGNALS_NAMES[e->sig]);
+
+    switch (e->sig) {
+        case Q_ENTRY_SIG: {
+            printk("%s: %d\n",__func__,me->hi2_duration);
+            QTimeEvt_armX(&me->timeEvt, me->hi2_duration, 0U);
+
+            LED_ON();
             status = Q_HANDLED();
             break;
         }

@@ -27,7 +27,7 @@ extern "C" {
  #endif		/* __cplusplus */
 
 #include "state_machine_manage.h"
-
+#include "module.h"
 
 typedef struct _PulseGen_Evt{
 // protected:
@@ -36,10 +36,12 @@ typedef struct _PulseGen_Evt{
 // public:
     uint32_t hi_duration;
     uint32_t lo_duration;
+    uint32_t hi2_duration;
+
 } PulseGen_Evt;
 
 void PulseGen_Init(void);
-void PulseGen_Post(uint32_t hi_duration, uint32_t lo_duration);
+void PulseGen_Post(uint32_t hi_duration, uint32_t lo_duration, uint32_t hi2_duration);
 
 
 #ifdef __cplusplus

@@ -13,6 +13,13 @@
  * </table>
  *****************************************************************************
  */
+
+#include <stdio.h>
+
+#include <zephyr/devicetree.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/kernel.h>
+
 int SW_Init(gpio_callback_handler_t handler);
 int SW_Status(void);
 

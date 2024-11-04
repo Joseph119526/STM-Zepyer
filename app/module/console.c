@@ -69,7 +69,7 @@ void Console_Callback(const struct device *dev, void *user_data)
 			k_msgq_put(&uart_msgq, &rx_buf, K_NO_WAIT);
 
 			if(rx_buf[0]=='p') {
-				PulseGen_Post(20, 80);
+				PulseGen_Post(20, 80, 40);
 			}
 
 			/* reset the buffer (it was copied to the msgq) */

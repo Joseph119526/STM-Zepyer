@@ -13,12 +13,7 @@
  * </table>
  *****************************************************************************
  */
-
-#include <stdio.h>
-
-#include <zephyr/devicetree.h>
-#include <zephyr/drivers/gpio.h>
-#include <zephyr/kernel.h>
+#include "sw.h"
 
 #if !DT_NODE_HAS_PROP(DT_INST(0, peripheral), f2_gpios)
 #error "Overlay for f2-gpios not properly defined."

@@ -29,7 +29,7 @@ int main(void)
 {
 	int ret = 0;
 
-	printk("Hello World! %s\n", CONFIG_BOARD);
+	printk("Hello World! %s\n This is Git branch\n", CONFIG_BOARD);
 
 	ret = LED_Init();
 	if(ret)

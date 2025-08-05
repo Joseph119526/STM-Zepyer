@@ -1,5 +1,7 @@
 manifest:
-  version: 0.13
+  self:
+    path: stm-zephyr-project
+ 
   defaults:
     remote: zephyrproject-rtos
 

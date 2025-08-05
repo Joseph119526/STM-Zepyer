@@ -21,4 +21,7 @@ manifest:
       path: deps/modules/hal/stm32
       revision: master
 
+  # 這行很重要，讓你的 app 直接放在專案根目錄
+  self:
+    path: .
 

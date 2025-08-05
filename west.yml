@@ -25,5 +25,5 @@ manifest:
         - hal
 
   self:
-    path: .
+    path: stm-zephyr-project
     west-commands: zephyr/scripts/west-commands.yml

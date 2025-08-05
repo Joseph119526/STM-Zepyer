@@ -8,10 +8,12 @@ manifest:
       url-base: https://github.com/zephyrproject-rtos
 
   projects:
+    # Zephyr 必須放第一個，west 才會正確設定 base
     - name: zephyr
       path: zephyr
       revision: main
       import: false
+      west-commands: scripts/west-commands.yml  # 指定 west 指令定義位置
 
     - name: cmsis
       path: modules/hal/cmsis
@@ -21,6 +23,6 @@ manifest:
       path: modules/hal/stm32
       revision: main
 
-  # 告訴 west：我自己的程式碼放在 app/
+  # 你的應用程式
   self:
     path: app

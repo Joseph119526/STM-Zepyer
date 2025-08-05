@@ -25,5 +25,5 @@ manifest:
         - hal
 
   self:
-    path: STM-Zepyer
+    path: app
 

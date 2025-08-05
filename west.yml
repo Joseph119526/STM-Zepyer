@@ -26,4 +26,5 @@ manifest:
 
   self:
     path: app
+    west-commands: zephyr/scripts/west-commands.yml
 

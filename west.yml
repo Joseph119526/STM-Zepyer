@@ -17,7 +17,8 @@ manifest:
 
     - name: cmsis
       path: modules/hal/cmsis
-      revision: master
+      revision: 5.9.0
+      url: https://github.com/zephyrproject-rtos/cmsis
 
     - name: hal_stm32
       path: modules/hal/stm32

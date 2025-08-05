@@ -8,24 +8,19 @@ manifest:
       url-base: https://github.com/zephyrproject-rtos
 
   projects:
-    # Zephyr 主專案
     - name: zephyr
       path: zephyr
       revision: main
       import: false
 
-    # ARM CMSIS
     - name: cmsis
       path: modules/hal/cmsis
       revision: main
 
-    # STM32 HAL
     - name: hal_stm32
       path: modules/hal/stm32
       revision: main
 
-  # 讓你的 app 直接放在專案根目錄
+  # 告訴 west：我自己的程式碼放在 app/
   self:
-    path: .
-
-
+    path: app

@@ -1,22 +1,60 @@
+# The west manifest file for upstream Zephyr.
+#
+# The per-installation west configuration file, .west/config, sets the
+# path to the project containing this file in the [manifest] section's
+# "path" variable.
+#
+# You are free to create your own manifest files and put them in any
+# repository you want, to create your own custom Zephyr installations.
+# For example, you could create a manifest file in your own out of
+# tree application directory, which would pull this zephyr repository
+# in as an ordinary project.
+#
+# You can pass your manifest repositories to west init when creating a
+# new Zephyr installation. See the west documentation for more
+# information.
+
 manifest:
-  version: "0.13"
   defaults:
-    remote: zephyrproject-rtos
+    remote: upstream
+
   remotes:
-    - name: zephyrproject-rtos
+    - name: upstream
       url-base: https://github.com/zephyrproject-rtos
+    - name: babblesim
+      url-base: https://github.com/BabbleSim
+
+  group-filter: [-babblesim, -optional]
+
+  #
+  # Please add items below based on alphabetical order
+  # zephyr-keep-sorted-start re(^\s+\- name:)
   projects:
-    - name: zephyr
-      path: zephyr
-      revision: main
-      import: true
-
     - name: cmsis
+      revision: 512cc7e895e8491696b61f7ba8066b4a182569b8
       path: modules/hal/cmsis
-      revision: master
-
+      groups:
+        - hal
+    - name: cmsis-dsp
+      revision: d80a49b2bb186317dc1db4ac88da49c0ab77e6e7
+      path: modules/lib/cmsis-dsp
+    - name: cmsis-nn
+      revision: e9328d612ea3ea7d0d210d3ac16ea8667c01abdd
+      path: modules/lib/cmsis-nn
+    - name: cmsis_6
+      repo-path: CMSIS_6
+      revision: 06d952b6713a2ca41c9224a62075e4059402a151
+      path: modules/hal/cmsis_6
+      groups:
+        - hal
     - name: hal_stm32
+      revision: 1e753266ddfb4b07a8a0b1ec566e9637ea45d5ef
       path: modules/hal/stm32
-      revision: main
+      groups:
+        - hal
+  # zephyr-keep-sorted-stop
+
   self:
-    path: app
+    path: zephyr
+    west-commands: scripts/west-commands.yml
+    import: submanifests

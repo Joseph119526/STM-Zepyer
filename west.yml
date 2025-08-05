@@ -15,7 +15,7 @@ manifest:
       west-commands: scripts/west-commands.yml
       
     - name: cmsis
-      revision: 512cc7e895e8491696b61f7ba8066b4a182569b8
+      revision: 21e6fdbfdd750b86031ed3f86a4dc8e6a8d8a7f2
       path: modules/hal/cmsis
       groups:
         - hal

@@ -43,4 +43,5 @@ manifest:
   # zephyr-keep-sorted-stop
 
   self:
+    path: .
     west-commands: zephyr/scripts/west-commands.yml  # 指定 west 指令定義位置

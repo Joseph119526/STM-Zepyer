@@ -1,4 +1,7 @@
 manifest:
+  self:
+    path: .
+ 
   defaults:
     remote: zephyrproject-rtos
 

@@ -13,7 +13,7 @@ manifest:
 
     - name: cmsis
       path: modules/hal/cmsis
-      revision: main
+      revision: master
 
     - name: hal_stm32
       path: modules/hal/stm32

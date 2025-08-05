@@ -8,29 +8,21 @@ manifest:
       url-base: https://github.com/zephyrproject-rtos
 
   projects:
-    # Zephyr 主專案
+    # Zephyr 主專案（不 import 其他模組）
     - name: zephyr
       path: deps/zephyr
-      revision: main
-      import:
-        name-allowlist:
-          - cmsis
-          - hal_stm32
+      revision: master
+      import: false
 
     # 必要的 ARM CMSIS
     - name: cmsis
       path: deps/modules/hal/cmsis
-      revision: main
+      revision: master
 
     # STM32 HAL
     - name: hal_stm32
       path: deps/modules/hal/stm32
-      revision: main
-
-    # 如果需要 bootloader
-    # - name: mcuboot
-    #   path: deps/bootloader/mcuboot
-    #   revision: main
+      revision: master
 
   self:
     path: .

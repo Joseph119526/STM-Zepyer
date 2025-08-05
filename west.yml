@@ -10,7 +10,7 @@ manifest:
   projects:
     - name: zephyr
       path: deps/zephyr
-      revision: master
+      revision: main
       import: false
 
     - name: cmsis

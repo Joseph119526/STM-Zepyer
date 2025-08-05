@@ -25,7 +25,7 @@ manifest:
   # Please add items below based on alphabetical order
   # zephyr-keep-sorted-start re(^\s+\- name:)
   projects:
-    # Zephyr 必須放第一個，west 才會正確設定 base
+      # Zephyr 必須放第一個，west 才會正確設定 base
     - name: zephyr
       path: zephyr
       revision: main

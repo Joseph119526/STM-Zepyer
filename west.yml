@@ -14,9 +14,21 @@ manifest:
       import: false
       west-commands: scripts/west-commands.yml
       
-    - name: cmsis
-      revision: 21e6fdbfdd750b86031ed3f86a4dc8e6a8d8a7f2
+   - name: cmsis
+      revision: 512cc7e895e8491696b61f7ba8066b4a182569b8
       path: modules/hal/cmsis
+      groups:
+        - hal
+    - name: cmsis-dsp
+      revision: d80a49b2bb186317dc1db4ac88da49c0ab77e6e7
+      path: modules/lib/cmsis-dsp
+    - name: cmsis-nn
+      revision: e9328d612ea3ea7d0d210d3ac16ea8667c01abdd
+      path: modules/lib/cmsis-nn
+    - name: cmsis_6
+      repo-path: CMSIS_6
+      revision: 06d952b6713a2ca41c9224a62075e4059402a151
+      path: modules/hal/cmsis_6
       groups:
         - hal
 

@@ -21,11 +21,6 @@ manifest:
   remotes:
     - name: upstream
       url-base: https://github.com/zephyrproject-rtos
-    - name: babblesim
-      url-base: https://github.com/BabbleSim
-
-  group-filter: [-babblesim, -optional]
-
   #
   # Please add items below based on alphabetical order
   # zephyr-keep-sorted-start re(^\s+\- name:)
@@ -55,6 +50,5 @@ manifest:
   # zephyr-keep-sorted-stop
 
   self:
-    path: zephyr
+    path: app
     west-commands: scripts/west-commands.yml
-    import: submanifests

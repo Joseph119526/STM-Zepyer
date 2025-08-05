@@ -22,3 +22,5 @@ manifest:
     - name: hal_stm32
       path: modules/hal/stm32
       revision: main
+  self:
+    path: app

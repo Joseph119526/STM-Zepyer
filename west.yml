@@ -1,27 +1,22 @@
 manifest:
-  version: 0.13
-  defaults:
-    remote: zephyrproject-rtos
-
+  version: "0.10"
   remotes:
     - name: zephyrproject-rtos
       url-base: https://github.com/zephyrproject-rtos
-
   projects:
-    # Zephyr 必須放第一個，west 才會正確設定 base
     - name: zephyr
       path: zephyr
+      remote: zephyrproject-rtos
       revision: main
-      import: false
-      west-commands: scripts/west-commands.yml  # 指定 west 指令定義位置
 
-    - name: cmsis
+    - name: hal_cmsis
       path: modules/hal/cmsis
-      url: https://github.com/ARM-software/CMSIS_5
-      revision: 5.8.0
+      remote: zephyrproject-rtos
+      revision: main
 
     - name: hal_stm32
       path: modules/hal/stm32
+      remote: zephyrproject-rtos
       revision: main
   self:
     path: app

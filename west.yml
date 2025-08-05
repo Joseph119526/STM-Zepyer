@@ -25,17 +25,15 @@ manifest:
   # Please add items below based on alphabetical order
   # zephyr-keep-sorted-start re(^\s+\- name:)
   projects:
-      - name: zephyr
+    - name: zephyr
       path: zephyr
       revision: main
       import: true
-
     - name: cmsis
       revision: 512cc7e895e8491696b61f7ba8066b4a182569b8
       path: modules/hal/cmsis
       groups:
         - hal
-
     - name: hal_stm32
       revision: 1e753266ddfb4b07a8a0b1ec566e9637ea45d5ef
       path: modules/hal/stm32

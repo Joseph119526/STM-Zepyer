@@ -8,21 +8,17 @@ manifest:
       url-base: https://github.com/zephyrproject-rtos
 
   projects:
-    # Zephyr 主專案（關閉 import）
     - name: zephyr
       path: deps/zephyr
-      revision: v3.6.0
+      revision: master
       import: false
 
-    # ARM CMSIS
     - name: cmsis
       path: deps/modules/hal/cmsis
-      revision: v5.9.0
+      revision: master
 
-    # STM32 HAL
     - name: hal_stm32
       path: deps/modules/hal/stm32
-      revision: v1.11.0
+      revision: master
 
-  self:
-    path: .
+

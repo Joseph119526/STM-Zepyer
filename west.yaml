@@ -1,0 +1,37 @@
+manifest:
+  version: 0.13
+  defaults:
+    remote: zephyrproject-rtos
+
+  remotes:
+    - name: zephyrproject-rtos
+      url-base: https://github.com/zephyrproject-rtos
+
+  projects:
+    # Zephyr 主專案
+    - name: zephyr
+      repo-path: zephyr
+      revision: main
+      import:
+        name-allowlist:
+          - cmsis
+          - hal_stm32
+          - mcuboot   # 如果需要 bootloader，可移除
+
+    # 必要的 ARM CMSIS
+    - name: cmsis
+      path: modules/hal/cmsis
+      revision: main
+
+    # STM32 HAL
+    - name: hal_stm32
+      path: modules/hal/stm32
+      revision: main
+
+    # 可選：MCUboot bootloader（如果不需要可以刪除）
+    - name: mcuboot
+      path: bootloader/mcuboot
+      revision: main
+
+  self:
+    path: zephyr

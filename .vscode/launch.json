@@ -2,16 +2,22 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Zephyr (J-Link Local)",
+            "name": "Debug Zephyr (J-Link Local, JTAG)",
             "type": "cortex-debug",
             "request": "launch",
-            "servertype": "external",
-            "gdbTarget": "localhost:2331",
-            "device": "STM32F446xE",
+            "servertype": "jlink",
+            "interface": "jtag",
+            "device": "STM32F446ZE",
+            "runToEntryPoint": "main",
             "executable": "${workspaceFolder}/build/zephyr/zephyr.elf",
-            "runToEntryPoint": "main"
+            "cwd": "${workspaceFolder}",
             "gdbPath": "/home/user/zephyr-sdk-0.16.8/arm-zephyr-eabi/bin/arm-zephyr-eabi-gdb",
-            "svdFile": "${workspaceFolder}/STM32F446.svd"
+            "svdFile": "${workspaceFolder}/STM32F446.svd",
+            "serverpath": "JLinkGDBServerCLExe",
+            "serverArgs": [
+                "-device", "STM32F446ZE",
+                "-speed", "4000"
+            ]
         }
     ]
 }
